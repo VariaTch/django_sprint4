@@ -11,8 +11,8 @@ class Category(models.Model):
         "Идентификатор",
         unique=True,
         help_text="Идентификатор страницы для URL; "
-        "разрешены символы латиницы, "
-        "цифры, дефис и подчёркивание.",
+        "разрешены символы латиницы, цифры, дефис "
+        "и подчёркивание.",
     )
     is_published = models.BooleanField(
         "Опубликовано",
@@ -51,8 +51,9 @@ class Post(models.Model):
     text = models.TextField("Текст")
     pub_date = models.DateTimeField(
         "Дата и время публикации",
-        help_text="Если установить дату и время в будущем — можно "
-        "делать отложенные публикации.",
+        help_text="Если установить дату "
+        "и время в будущем — можно делать "
+        "отложенные публикации.",
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="Автор публикации"
@@ -69,7 +70,13 @@ class Post(models.Model):
         null=True,
         blank=False,
         on_delete=models.PROTECT,
-        verbose_name="Категория"
+        verbose_name="Категория",
+    )
+    image = models.ImageField(
+        "Изображение",
+        upload_to="post_images/",
+        null=True,
+        blank=True,
     )
     is_published = models.BooleanField(
         "Опубликовано",
@@ -85,3 +92,26 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    text = models.TextField(verbose_name="Текст комментария")
+    post = models.ForeignKey(
+        Post,
+        verbose_name="Публикация",
+        related_name="comments",
+        on_delete=models.CASCADE,
+    )
+    author = models.ForeignKey(
+        User, verbose_name="Автор комментария", on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(verbose_name="Добавлено",
+                                      auto_now_add=True)
+
+    class Meta:
+        verbose_name = "комментарий"
+        verbose_name_plural = "Комментарии"
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"Комментарий к публикации {self.post.title} от {self.author}."

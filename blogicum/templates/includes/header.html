@@ -24,7 +24,7 @@
                 <a class="text-decoration-none text-reset" href="{% url 'blog:create_post' %}">Написать пост</a>
               </button>
               <button type="button" class="btn btn-outline-primary">
-                <a class="text-decoration-none text-reset" href="{% url 'users:profile' user.username %}">{{ user.username }}</a>
+                <a class="text-decoration-none text-reset" href="{% url 'blog:profile' user.username %}">{{ user.username }}</a>
               </button>
               <button type="button" class="btn btn-outline-primary">
                 <a class="text-decoration-none text-reset" href="{% url 'logout' %}">Выйти</a>
@@ -36,7 +36,7 @@
                 <a class="text-decoration-none text-reset" href="{% url 'login' %}">Войти</a>
               </button>
               <button type="button" class="btn btn-outline-primary">
-                <a class="text-decoration-none text-reset" href="{% url 'users:registration' %}">Регистрация</a>
+                <a class="text-decoration-none text-reset" href="{% url 'registration' %}">Регистрация</a>
               </button>
             </div>
           {% endif %}

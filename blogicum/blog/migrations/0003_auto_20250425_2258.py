@@ -5,27 +5,38 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0002_auto_20250425_2237'),
+        ("blog", "0002_auto_20250425_2237"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name': 'категория', 'verbose_name_plural': 'Категории'},
+            name="category",
+            options={"verbose_name": "категория", "verbose_name_plural": "Категории"},
         ),
         migrations.AlterModelOptions(
-            name='location',
-            options={'verbose_name': 'местоположение', 'verbose_name_plural': 'Местоположения'},
+            name="location",
+            options={
+                "verbose_name": "местоположение",
+                "verbose_name_plural": "Местоположения",
+            },
         ),
         migrations.AlterModelOptions(
-            name='post',
-            options={'ordering': ['-pub_date'], 'verbose_name': 'публикация', 'verbose_name_plural': 'Публикации'},
+            name="post",
+            options={
+                "ordering": ["-pub_date"],
+                "verbose_name": "публикация",
+                "verbose_name_plural": "Публикации",
+            },
         ),
         migrations.AlterField(
-            model_name='post',
-            name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='blog.category', verbose_name='Категория'),
+            model_name="post",
+            name="category",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="blog.category",
+                verbose_name="Категория",
+            ),
         ),
     ]
